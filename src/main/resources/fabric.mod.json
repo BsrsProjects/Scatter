@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "scatter",
+  "version": "${version}",
+  "name": "Scatter",
+  "description": "",
+  "authors": [
+    "Lirios Selviro"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/scatter/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "org.lirox.scatter.client.ScatterClient"
+    ],
+    "main": [
+      "org.lirox.scatter.Scatter"
+    ]
+  },
+  "mixins": [
+    "scatter.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
