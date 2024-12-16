@@ -1,5 +1,7 @@
 package org.lirox.scatter.items;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -19,7 +21,7 @@ public class InfusedMagmaItem extends Item {
         if (user.getItemCooldownManager().isCoolingDown(user.getStackInHand(hand).getItem())) {
             return TypedActionResult.fail(user.getStackInHand(hand));
         }
-//        world.spawnEntity();
+        world.spawnEntity(new MeteoriteEntity(EntityType.ARROW, world));
         user.getItemCooldownManager().set(user.getStackInHand(hand).getItem(), 300);
         return TypedActionResult.success(user.getStackInHand(hand));
     }
