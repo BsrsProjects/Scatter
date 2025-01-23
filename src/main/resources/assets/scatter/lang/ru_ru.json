@@ -1,0 +1,10 @@
+{
+  "item.scatter.venomfang": "Ядоклык",
+  "item.scatter.venomfang.desc.0": "При нанесении урона накладывает эффекты зелий на врага.",
+  "item.scatter.potion_effect_infuser": "Сосуд вечного зелья",
+  "item.scatter.potion_effect_infuser.desc.0": "Сосуд, содержащий неизмеримое количество определенных зелий.",
+  "item.scatter.potion_effect_infuser.desc.1": "Используйте в основной руке, чтобы высвободить эффекты зелий.",
+  "item.scatter.potion_effect_infuser.desc.2": "Используйте с предметом в дополнительной руке, чтобы наложить эффекты зелий.",
+  "special.potion_effects.effects": "Эффекты зелий:",
+  "special.potion_effects.drained": "- Опустошен"
+}

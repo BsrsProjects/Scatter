@@ -1,0 +1,10 @@
+{
+  "item.scatter.venomfang": "Venomfang",
+  "item.scatter.venomfang.desc.0": "Upon dealing damage inflicts potion effects on enemy.",
+  "item.scatter.potion_effect_infuser": "Infinite potion vessel",
+  "item.scatter.potion_effect_infuser.desc.0": "A vessel containing an immeasurable amount of specific potions.",
+  "item.scatter.potion_effect_infuser.desc.1": "Use in main hand to free potion effects.",
+  "item.scatter.potion_effect_infuser.desc.2": "Use with item in off hand to infuse it.",
+  "special.potion_effects.effects": "Potion effects:",
+  "special.potion_effects.drained": "- Depleted"
+}

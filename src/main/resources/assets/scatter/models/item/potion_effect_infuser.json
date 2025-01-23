@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "scatter:item/potion_effect_infuser",
+    "layer1": "scatter:item/potion_effect_infuser_overlay"
+  }
+}

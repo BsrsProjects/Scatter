@@ -24,8 +24,9 @@ dependencies {
     mappings "net.fabricmc:yarn:${project.yarn_mappings}"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-    modImplementation "io.github.0x3c50.renderer:renderer-fabric:${renderer_version}"
-    modImplementation "org.ladysnake:satin:${satin_version}"
+//    modImplementation "io.github.0x3c50.renderer:renderer-fabric:${renderer_version}"
+//    modImplementation "org.ladysnake:satin:${satin_version}"
+    // Todo: fix versions
 }
 
 processResources {
