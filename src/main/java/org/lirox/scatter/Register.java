@@ -32,7 +32,7 @@ public class Register {
         INFUSED_MAGMA = registerItem("infused_magma", new InfusedMagmaItem(new Item.Settings()), ItemGroups.COMBAT);
         EVENT_VESSEL = registerItem("event_vessel", new EventVesselItem(new Item.Settings()), ItemGroups.COMBAT);
         EVENT_SEALER = registerItem("event_sealer", new EventSealerItem(new Item.Settings()), ItemGroups.COMBAT);
-        POTION_EFFECT_INFUSER = registerItem("potion_effect_infuser", new PotionEffectInfuserItem(new Item.Settings()), ItemGroups.COMBAT);
+        POTION_EFFECT_INFUSER = registerItem("potion_effect_infuser", new PotionEffectInfuserItem(new Item.Settings().maxCount(1)), ItemGroups.COMBAT);
 
         // - Weapons
         VENOMFANG = registerItem("venomfang", new VenomfangItem(ToolMaterials.NETHERITE, 2, -2.0F, new Item.Settings()), ItemGroups.COMBAT);

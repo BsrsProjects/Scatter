@@ -1,10 +1,16 @@
 {
   "item.scatter.venomfang": "Venomfang",
   "item.scatter.venomfang.desc.0": "Upon dealing damage inflicts potion effects on enemy.",
+  "item.scatter.venomfang.desc.1": "Hold with potion in off hand to fill the weapon.",
+  "item.scatter.venomfang.desc.2": "Incorrect potion may reset potion effects!",
   "item.scatter.potion_effect_infuser": "Infinite potion vessel",
   "item.scatter.potion_effect_infuser.desc.0": "A vessel containing an immeasurable amount of specific potions.",
   "item.scatter.potion_effect_infuser.desc.1": "Use in main hand to free potion effects.",
   "item.scatter.potion_effect_infuser.desc.2": "Use with item in off hand to infuse it.",
+  "block.scatter.soul_brewery": "Soul brewery",
+  "block.scatter.soul_brewery.desc.0": "This block brews a potion using 1-3 different ingredients.",
+  "block.scatter.soul_brewery.desc.1": "What is this now, Caves of QUD?",
   "special.potion_effects.effects": "Potion effects:",
-  "special.potion_effects.drained": "- Depleted"
+  "special.potion_effects.drained": "- Depleted",
+  "special.uses": "Uses: "
 }

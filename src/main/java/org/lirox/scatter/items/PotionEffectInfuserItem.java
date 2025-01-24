@@ -5,6 +5,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -21,11 +22,15 @@ import net.minecraft.util.Rarity;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import org.lirox.scatter.Auxilium;
 import org.lirox.scatter.Register;
 
 import java.awt.*;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
+
+import static org.lirox.scatter.Auxilium.calculatePotionDurationByAmplifier;
 
 public class PotionEffectInfuserItem extends Item {
     public PotionEffectInfuserItem(Settings settings) {
@@ -45,7 +50,13 @@ public class PotionEffectInfuserItem extends Item {
                 mainHand.getNbt().remove("CustomPotionEffects");
                 user.playSound(SoundEvents.BLOCK_BEACON_POWER_SELECT, 1, 1);
                 if (offHand.hasNbt() && offHand.getNbt().contains("potionInfuse")) {
+                    if (offHand.getNbt().contains("calculateEffectTime")) {
+                        calculatePotionDurationByAmplifier(effects, 20, 80);
+                    }
                     PotionUtil.setCustomPotionEffects(offHand, effects);
+                    if (offHand.getNbt().contains("uses")) {
+                        offHand.getNbt().putInt("uses", 99999999);
+                    }
                     return TypedActionResult.success(mainHand);
                 }
 
@@ -65,7 +76,7 @@ public class PotionEffectInfuserItem extends Item {
             List<StatusEffectInstance> effects = PotionUtil.getCustomPotionEffects(mainHand);
             if (user.isCreative() && offHand.getItem().equals(Items.POTION) && mainHand.getItem().equals(Register.POTION_EFFECT_INFUSER)) {
                 List<StatusEffectInstance> potionEffects = PotionUtil.getPotionEffects(offHand);
-                effects.addAll(potionEffects);
+                Auxilium.mergePotionEffectsAmplifier(effects, potionEffects);
                 offHand.decrement(1);
                 PotionUtil.setCustomPotionEffects(mainHand, effects);
                 user.playSound(SoundEvents.BLOCK_BEACON_POWER_SELECT, 1, 1);
@@ -82,11 +93,7 @@ public class PotionEffectInfuserItem extends Item {
         tooltip.add(Text.translatable("special.potion_effects.effects").formatted(Formatting.GOLD));
         if (stack.hasNbt() && stack.getNbt().contains("CustomPotionEffects")) {
             List<StatusEffectInstance> effects = PotionUtil.getCustomPotionEffects(stack);
-            for (StatusEffectInstance effect : effects) {
-                String amp = String.valueOf(effect.getAmplifier()+1);
-                if (amp.equals("1")) amp = "";
-                tooltip.add(Text.literal("- ").append(Text.translatable(effect.getTranslationKey()).append(" ").append(amp).formatted(Formatting.AQUA)));
-            }
-        } else tooltip.add(Text.translatable("special.potion_effects.drained").formatted(Formatting.DARK_GRAY));
+            tooltip.addAll(Auxilium.generatEffectsTooltip(effects));
+        } else tooltip.addAll(Auxilium.generatEffectsTooltip(new ArrayList<>()));
     }
 }

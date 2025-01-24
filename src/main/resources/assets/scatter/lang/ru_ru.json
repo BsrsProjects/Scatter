@@ -1,10 +1,16 @@
 {
   "item.scatter.venomfang": "Ядоклык",
   "item.scatter.venomfang.desc.0": "При нанесении урона накладывает эффекты зелий на врага.",
+  "item.scatter.venomfang.desc.1": "Держите с зельем в левой руке, чтобы наполнить оружие.",
+  "item.scatter.venomfang.desc.2": "Неверное зелье может сбросить эффекты зелья!",
   "item.scatter.potion_effect_infuser": "Сосуд вечного зелья",
   "item.scatter.potion_effect_infuser.desc.0": "Сосуд, содержащий неизмеримое количество определенных зелий.",
   "item.scatter.potion_effect_infuser.desc.1": "Используйте в основной руке, чтобы высвободить эффекты зелий.",
   "item.scatter.potion_effect_infuser.desc.2": "Используйте с предметом в дополнительной руке, чтобы наложить эффекты зелий.",
+  "block.scatter.soul_brewery": "Зельеварня душ",
+  "block.scatter.soul_brewery.desc.0": "Варит зелье из 1-3 ингридиентов.",
+  "block.scatter.soul_brewery.desc.1": "Ну и что это теперь, Caves of QUD?",
   "special.potion_effects.effects": "Эффекты зелий:",
-  "special.potion_effects.drained": "- Опустошен"
+  "special.potion_effects.drained": "- Опустошен",
+  "special.uses": "Использований: "
 }

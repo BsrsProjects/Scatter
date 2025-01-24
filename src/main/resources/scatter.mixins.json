@@ -6,6 +6,7 @@
   "mixins": [
   ],
   "client": [
+    "ItemUsesRenderMixin"
   ],
   "injectors": {
     "defaultRequire": 1
