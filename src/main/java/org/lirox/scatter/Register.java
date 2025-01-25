@@ -24,6 +24,7 @@ public class Register {
     public static Item EVENT_VESSEL;
     public static Item EVENT_SEALER;
     public static Item POTION_EFFECT_INFUSER;
+    public static Item LARGE_POTION;
     public static Item PLAYER_SOUL_SHARD;
     public static Item VENOMFANG;
 
@@ -33,6 +34,7 @@ public class Register {
         EVENT_VESSEL = registerItem("event_vessel", new EventVesselItem(new Item.Settings()), ItemGroups.COMBAT);
         EVENT_SEALER = registerItem("event_sealer", new EventSealerItem(new Item.Settings()), ItemGroups.COMBAT);
         POTION_EFFECT_INFUSER = registerItem("potion_effect_infuser", new PotionEffectInfuserItem(new Item.Settings().maxCount(1)), ItemGroups.COMBAT);
+        LARGE_POTION = registerItem("large_potion", new LargePotionItem(new Item.Settings().maxCount(1)), ItemGroups.FOOD_AND_DRINK);
 
         // - Weapons
         VENOMFANG = registerItem("venomfang", new VenomfangItem(ToolMaterials.NETHERITE, 2, -2.0F, new Item.Settings()), ItemGroups.COMBAT);
@@ -48,6 +50,7 @@ public class Register {
 
 
         ColorProviderRegistry.ITEM.register(new PotionOverlayColorProvider(), POTION_EFFECT_INFUSER);
+        ColorProviderRegistry.ITEM.register(new PotionOverlayColorProvider(), LARGE_POTION);
         ColorProviderRegistry.ITEM.register(new PotionOverlayColorProvider(), VENOMFANG);
 
     }

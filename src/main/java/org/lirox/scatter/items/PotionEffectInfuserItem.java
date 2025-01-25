@@ -90,10 +90,6 @@ public class PotionEffectInfuserItem extends Item {
         for (int i = 0; i <= 2; i++) {
             tooltip.add(Text.translatable("item.scatter.potion_effect_infuser.desc." + i).formatted(Formatting.GRAY));
         }
-        tooltip.add(Text.translatable("special.potion_effects.effects").formatted(Formatting.GOLD));
-        if (stack.hasNbt() && stack.getNbt().contains("CustomPotionEffects")) {
-            List<StatusEffectInstance> effects = PotionUtil.getCustomPotionEffects(stack);
-            tooltip.addAll(Auxilium.generatEffectsTooltip(effects));
-        } else tooltip.addAll(Auxilium.generatEffectsTooltip(new ArrayList<>()));
+        tooltip.addAll(Auxilium.generateEffectsTooltip(PotionUtil.getCustomPotionEffects(stack)));
     }
 }

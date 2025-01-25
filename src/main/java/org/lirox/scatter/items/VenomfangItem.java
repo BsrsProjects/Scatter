@@ -57,7 +57,7 @@ public class VenomfangItem extends SwordItem {
                 if (Auxilium.maxPotionAmplifier(potionEffects) > 0) increment = 5;
                 int uses = mainHand.getNbt().getInt("uses");
                 int maxUses = mainHand.getNbt().getInt("maxUses");
-                if (Auxilium.comparePotionTypesAndAmplifiers(effects, potionEffects)) {
+                if (Auxilium.comparePotionAmplifiers(effects, potionEffects)) {
                     if (uses < maxUses) mainHand.getNbt().putInt("uses", Math.min(maxUses, uses+increment));
                 } else {
                     mainHand.getNbt().putInt("uses", increment);
@@ -76,6 +76,9 @@ public class VenomfangItem extends SwordItem {
                 if (!target.hasStatusEffect(effect.getEffectType())) {
                     target.addStatusEffect(effect);
                     stack.getNbt().putInt("uses", stack.getNbt().getInt("uses")-1);
+                    if (stack.getNbt().getInt("uses") == 0) {
+                        stack.getNbt().remove("CustomPotionEffects");
+                    }
 //                    for (int i = 0; i < 15; i++) {
 //                        target.getWorld().addParticle(ParticleTypes.EFFECT, target.getX(), target.getY(), target.getZ(), random.nextDouble()-0.5, random.nextDouble()-0.5, random.nextDouble()-0.5);
 //                    }
@@ -88,18 +91,10 @@ public class VenomfangItem extends SwordItem {
     @Override
     public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
         super.appendTooltip(stack, world, tooltip, context);
-        for (int i = 0; i <= 0; i++) {
+        for (int i = 0; i <= 2; i++) {
             tooltip.add(Text.translatable("item.scatter.venomfang.desc." + i).formatted(Formatting.GRAY));
         }
-
-        if (stack.hasNbt() && stack.getNbt().contains("uses") && stack.getNbt().contains("maxUses")) {
-            int maxUses = stack.getNbt().getInt("maxUses");
-            int uses = Math.min(maxUses, Math.max(0, stack.getNbt().getInt("uses")));
-            tooltip.add(Text.translatable("special.uses").append(String.valueOf(uses)).append("/").append(String.valueOf(maxUses)).formatted(Formatting.AQUA));
-        }
-        if (stack.hasNbt() && stack.getNbt().contains("CustomPotionEffects")) {
-            List<StatusEffectInstance> effects = PotionUtil.getCustomPotionEffects(stack);
-            tooltip.addAll(Auxilium.generatEffectsTooltip(effects));
-        } else tooltip.addAll(Auxilium.generatEffectsTooltip(new ArrayList<>()));
+        tooltip.add(Auxilium.generateUsesTooltip(stack));
+        tooltip.addAll(Auxilium.generateEffectsTooltip(PotionUtil.getCustomPotionEffects(stack)));
     }
 }

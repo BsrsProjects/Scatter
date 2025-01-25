@@ -3,9 +3,14 @@ package org.lirox.scatter;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionUtil;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.math.MathHelper;
+import org.apache.logging.log4j.core.config.plugins.convert.TypeConverters;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,14 +25,27 @@ public class Auxilium {
         return name;
     }
 
-    public static List<Text> generatEffectsTooltip(List<StatusEffectInstance> effects) {
+
+    public static List<Text> generateEffectsTooltip(List<StatusEffectInstance> effects) {
+        return generateEffectsTooltip(effects, true, true, true);
+    }
+
+    public static List<Text> generateEffectsTooltip(List<StatusEffectInstance> effects, boolean addName, boolean addAmplifier, boolean addTime) {
         List<Text> text = new ArrayList<>();
         text.add(Text.translatable("special.potion_effects.effects").formatted(Formatting.GOLD));
         if (!effects.isEmpty()) {
             for (StatusEffectInstance effect : effects) {
-                String amp = String.valueOf(effect.getAmplifier()+1);
-                if (amp.equals("1")) amp = "";
-                text.add(Text.literal("- ").append(Text.translatable(effect.getTranslationKey()).append(" ").append(amp).formatted(Formatting.GREEN)));
+                String amplifier = String.valueOf(effect.getAmplifier()+1);
+                if (amplifier.equals("1")) amplifier = "";
+                String duration = "";
+                if (effect.getDuration() >= 20) {
+                    Duration duration_raw = Duration.ofSeconds(effect.getDuration()/20);
+                    String seconds = String.valueOf(duration_raw.toSecondsPart());
+                    if (seconds.length() < 2) seconds = "0"+seconds;
+                    duration = duration_raw.toMinutesPart()+":"+seconds;
+                }
+                text.add(Text.literal("- ").append(Text.translatable(effect.getTranslationKey())).append(" ").append(amplifier)
+                        .append(" ").append(duration).formatted(Formatting.GREEN));
             }
         } else text.add(Text.translatable("special.potion_effects.drained").formatted(Formatting.DARK_GRAY));
         return text;
@@ -80,7 +98,19 @@ public class Auxilium {
         return true;
     }
 
-    public static boolean comparePotionTypesAndAmplifiers(List<StatusEffectInstance> effects1, List<StatusEffectInstance> effects2) {
+    public static boolean comparePotionAmplifiers(List<StatusEffectInstance> effects1, List<StatusEffectInstance> effects2) {
+         return comparePotionEffects(effects1, effects2, true, false);
+    }
+
+    public static boolean comparePotionDurations(List<StatusEffectInstance> effects1, List<StatusEffectInstance> effects2) {
+        return comparePotionEffects(effects1, effects2, false, true);
+    }
+
+    public static boolean comparePotionEffects(List<StatusEffectInstance> effects1, List<StatusEffectInstance> effects2) {
+        return comparePotionEffects(effects1, effects2, true, true);
+    }
+
+    public static boolean comparePotionEffects(List<StatusEffectInstance> effects1, List<StatusEffectInstance> effects2, boolean compareAmplifier, boolean compareDuration) {
         if (effects1.size() != effects2.size()) {
             return false;
         }
@@ -89,7 +119,9 @@ public class Auxilium {
             StatusEffectInstance effect1 = effects1.get(i);
             StatusEffectInstance effect2 = effects2.get(i);
 
-            if (!effect1.getEffectType().equals(effect2.getEffectType()) || effect1.getAmplifier() != effect2.getAmplifier()) return false;
+            if (!effect1.getEffectType().equals(effect2.getEffectType())) return false;
+            if (compareAmplifier && effect1.getAmplifier() != effect2.getAmplifier()) return false;
+            if (compareDuration && effect1.getDuration() != effect2.getDuration()) return false;
         }
 
         return true;
@@ -117,4 +149,17 @@ public class Auxilium {
         return effects;
     }
 
+    public static Text generateUsesTooltip(ItemStack stack) {
+        return generateUsesTooltip(stack, 1);
+    }
+
+    public static Text generateUsesTooltip(ItemStack stack, float divideFactor) {
+        if (stack.hasNbt() && stack.getNbt().contains("uses") && stack.getNbt().contains("maxUses")) {
+            int maxUses = stack.getNbt().getInt("maxUses");
+            int uses = (int) (MathHelper.clamp(stack.getNbt().getInt("uses"), 0, maxUses) /divideFactor);
+            maxUses = (int) (maxUses/divideFactor);
+            return Text.translatable("special.uses").append(String.valueOf(uses)).append("/").append(String.valueOf(maxUses)).formatted(Formatting.AQUA);
+        }
+        return Text.empty();
+    }
 }

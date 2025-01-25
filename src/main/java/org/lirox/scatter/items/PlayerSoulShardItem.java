@@ -49,5 +49,5 @@ public class PlayerSoulShardItem extends Item {
         }
     }
 
-    // Todo: Something that edit its color idk
+    // Todo:
 }

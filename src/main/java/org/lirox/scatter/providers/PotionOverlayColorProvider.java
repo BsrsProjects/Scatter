@@ -13,7 +13,7 @@ public class PotionOverlayColorProvider implements ItemColorProvider {
     public int getColor(ItemStack stack, int layer) {
         if (layer == 1) {
             List<StatusEffectInstance> effects = PotionUtil.getCustomPotionEffects(stack);
-            if (effects.isEmpty()) return Color.TRANSLUCENT;
+            if (effects.isEmpty()) return 0;
             return PotionUtil.getColor(effects);
         }
         return 0xFFFFFF;
