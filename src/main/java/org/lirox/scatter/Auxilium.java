@@ -11,10 +11,7 @@ import net.minecraft.util.math.MathHelper;
 import org.apache.logging.log4j.core.config.plugins.convert.TypeConverters;
 
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Auxilium {
     public static String generateCustomPotionName(List<Item> ingredients) {
@@ -161,5 +158,33 @@ public class Auxilium {
             return Text.translatable("special.uses").append(String.valueOf(uses)).append("/").append(String.valueOf(maxUses)).formatted(Formatting.AQUA);
         }
         return Text.empty();
+    }
+
+    public static boolean stackNbtHasKey(ItemStack stack, String key) {
+        return stack.hasNbt() && stack.getNbt().contains(key);
+    }
+
+    public static void defaultBooleanNbt(ItemStack stack, String key, boolean value) {
+        if (!stackNbtHasKey(stack, key)) stack.getOrCreateNbt().putBoolean(key, value);
+    }
+
+    public static void defaultIntNbt(ItemStack stack, String key, int value) {
+        if (!stackNbtHasKey(stack, key)) stack.getOrCreateNbt().putInt(key, value);
+    }
+
+    public static void defaultFloatNbt(ItemStack stack, String key, float value) {
+        if (!stackNbtHasKey(stack, key)) stack.getOrCreateNbt().putFloat(key, value);
+    }
+
+    public static void defaultStringNbt(ItemStack stack, String key, String value) {
+        if (!stackNbtHasKey(stack, key)) stack.getOrCreateNbt().putString(key, value);
+    }
+
+    public static List<Text> generateDescriptionTooltip(String key, int count) {
+        List<Text> text = new ArrayList<>();
+        for (int i = 0; i <= count-1; i++) {
+            text.add(Text.translatable("item.scatter." + key + ".desc." + i).formatted(Formatting.GRAY));
+        }
+        return text;
     }
 }

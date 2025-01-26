@@ -55,7 +55,7 @@ public class PotionEffectInfuserItem extends Item {
                     }
                     PotionUtil.setCustomPotionEffects(offHand, effects);
                     if (offHand.getNbt().contains("uses")) {
-                        offHand.getNbt().putInt("uses", 99999999);
+                        offHand.getNbt().putInt("uses", Integer.MAX_VALUE);
                     }
                     return TypedActionResult.success(mainHand);
                 }
@@ -76,6 +76,7 @@ public class PotionEffectInfuserItem extends Item {
             List<StatusEffectInstance> effects = PotionUtil.getCustomPotionEffects(mainHand);
             if (user.isCreative() && offHand.getItem().equals(Items.POTION) && mainHand.getItem().equals(Register.POTION_EFFECT_INFUSER)) {
                 List<StatusEffectInstance> potionEffects = PotionUtil.getPotionEffects(offHand);
+                if (potionEffects.isEmpty()) return;
                 Auxilium.mergePotionEffectsAmplifier(effects, potionEffects);
                 offHand.decrement(1);
                 PotionUtil.setCustomPotionEffects(mainHand, effects);
@@ -87,9 +88,7 @@ public class PotionEffectInfuserItem extends Item {
     @Override
     public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
         super.appendTooltip(stack, world, tooltip, context);
-        for (int i = 0; i <= 2; i++) {
-            tooltip.add(Text.translatable("item.scatter.potion_effect_infuser.desc." + i).formatted(Formatting.GRAY));
-        }
+        tooltip.addAll(Auxilium.generateDescriptionTooltip("potion_effect_infuser", 3));
         tooltip.addAll(Auxilium.generateEffectsTooltip(PotionUtil.getCustomPotionEffects(stack)));
     }
 }

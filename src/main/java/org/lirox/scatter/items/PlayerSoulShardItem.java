@@ -49,5 +49,5 @@ public class PlayerSoulShardItem extends Item {
         }
     }
 
-    // Todo:
+    // Todo: Store information about lost soul fragments in player
 }

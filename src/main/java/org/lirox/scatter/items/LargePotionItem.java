@@ -45,15 +45,15 @@ public class LargePotionItem extends Item {
 
     @Override
     public int getMaxUseTime(ItemStack stack) {
-        return 40;
+        return 37; // Why 37? no reason
     }
 
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         super.inventoryTick(stack, world, entity, slot, selected);
-        if (!stack.hasNbt() || !stack.getNbt().contains("potionInfuse")) stack.getOrCreateNbt().putBoolean("potionInfuse", true);
-        if (!stack.hasNbt() || !stack.getNbt().contains("uses")) stack.getOrCreateNbt().putInt("uses", 0);
-        if (!stack.hasNbt() || !stack.getNbt().contains("maxUses")) stack.getOrCreateNbt().putInt("maxUses", 50);
+        Auxilium.defaultBooleanNbt(stack, "potionInfuse", true);
+        Auxilium.defaultIntNbt(stack, "uses", 0);
+        Auxilium.defaultIntNbt(stack, "maxUses", 50);
 
         if (entity instanceof PlayerEntity user) {
             ItemStack mainHand = user.getStackInHand(Hand.MAIN_HAND);
@@ -63,7 +63,7 @@ public class LargePotionItem extends Item {
                 List<StatusEffectInstance> potionEffects = Auxilium.mergePotionEffects(
                                 PotionUtil.getPotionEffects(offHand), PotionUtil.getCustomPotionEffects(offHand),
                         false, false);
-
+                if (potionEffects.isEmpty()) return;
                 offHand.decrement(1);
                 user.giveItemStack(new ItemStack(Items.GLASS_BOTTLE, 1));
                 int uses = mainHand.getNbt().getInt("uses");
@@ -81,14 +81,12 @@ public class LargePotionItem extends Item {
 
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
-        if (stack.hasNbt() && stack.getNbt().contains("uses") && stack.getNbt().getInt("uses") > 0) {
+        if (Auxilium.stackNbtHasKey(stack, "uses") && stack.getNbt().getInt("uses") > 0) {
             for (StatusEffectInstance effect : PotionUtil.getCustomPotionEffects(stack)) {
                 user.addStatusEffect(effect);
             }
             stack.getNbt().putInt("uses", Math.max(0, stack.getNbt().getInt("uses")-10));
-            if (stack.getNbt().getInt("uses") == 0) {
-                stack.getNbt().remove("CustomPotionEffects");
-            }
+            if (stack.getNbt().getInt("uses") == 0) stack.getNbt().remove("CustomPotionEffects");
         }
         return super.finishUsing(stack, world, user);
     }
@@ -101,9 +99,7 @@ public class LargePotionItem extends Item {
     @Override
     public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
         super.appendTooltip(stack, world, tooltip, context);
-        for (int i = 0; i <= 0; i++) {
-            tooltip.add(Text.translatable("item.scatter.large_potion.desc." + i).formatted(Formatting.GRAY));
-        }
+        tooltip.addAll(Auxilium.generateDescriptionTooltip("large_potion", 3));
         tooltip.add(Auxilium.generateUsesTooltip(stack, 10));
         tooltip.addAll(Auxilium.generateEffectsTooltip(PotionUtil.getCustomPotionEffects(stack)));
     }

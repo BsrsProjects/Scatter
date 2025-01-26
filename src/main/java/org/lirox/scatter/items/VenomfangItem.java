@@ -36,10 +36,10 @@ public class VenomfangItem extends SwordItem {
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         super.inventoryTick(stack, world, entity, slot, selected);
-        if (!stack.hasNbt() || !stack.getNbt().contains("potionInfuse")) stack.getOrCreateNbt().putBoolean("potionInfuse", true);
-        if (!stack.hasNbt() || !stack.getNbt().contains("calculateEffectTime")) stack.getOrCreateNbt().putBoolean("calculateEffectTime", true);
-        if (!stack.hasNbt() || !stack.getNbt().contains("uses")) stack.getOrCreateNbt().putInt("uses", 0);
-        if (!stack.hasNbt() || !stack.getNbt().contains("maxUses")) stack.getOrCreateNbt().putInt("maxUses", 50);
+        Auxilium.defaultBooleanNbt(stack, "potionInfuse", true);
+        Auxilium.defaultBooleanNbt(stack, "calculateEffectTime", true);
+        Auxilium.defaultIntNbt(stack, "uses", 0);
+        Auxilium.defaultIntNbt(stack, "maxUses", 50);
 
         if (entity instanceof PlayerEntity user) {
             ItemStack mainHand = user.getStackInHand(Hand.MAIN_HAND);
@@ -82,6 +82,7 @@ public class VenomfangItem extends SwordItem {
 //                    for (int i = 0; i < 15; i++) {
 //                        target.getWorld().addParticle(ParticleTypes.EFFECT, target.getX(), target.getY(), target.getZ(), random.nextDouble()-0.5, random.nextDouble()-0.5, random.nextDouble()-0.5);
 //                    }
+                    // TODO: Make some indicator that effects were successfully applied
                 }
             }
         }
@@ -91,9 +92,7 @@ public class VenomfangItem extends SwordItem {
     @Override
     public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
         super.appendTooltip(stack, world, tooltip, context);
-        for (int i = 0; i <= 2; i++) {
-            tooltip.add(Text.translatable("item.scatter.venomfang.desc." + i).formatted(Formatting.GRAY));
-        }
+        tooltip.addAll(Auxilium.generateDescriptionTooltip("venomfang", 3));
         tooltip.add(Auxilium.generateUsesTooltip(stack));
         tooltip.addAll(Auxilium.generateEffectsTooltip(PotionUtil.getCustomPotionEffects(stack)));
     }
