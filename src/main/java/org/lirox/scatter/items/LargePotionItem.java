@@ -27,16 +27,6 @@ public class LargePotionItem extends Item {
         super(settings);
     }
 
-//    @Override
-//    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-//        ItemStack mainHand = user.getStackInHand(Hand.MAIN_HAND);
-//        ItemStack offHand = user.getStackInHand(Hand.OFF_HAND);
-//
-//
-//
-//        return TypedActionResult.fail(mainHand);
-//    }
-
     @Override
     public UseAction getUseAction(ItemStack stack) {
         if (!PotionUtil.getCustomPotionEffects(stack).isEmpty()) return UseAction.DRINK;

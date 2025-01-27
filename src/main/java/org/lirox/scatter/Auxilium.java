@@ -14,15 +14,6 @@ import java.time.Duration;
 import java.util.*;
 
 public class Auxilium {
-    public static String generateCustomPotionName(List<Item> ingredients) {
-        String name = "";
-        for (Item ingredient : ingredients) {
-
-        }
-        return name;
-    }
-
-
     public static List<Text> generateEffectsTooltip(List<StatusEffectInstance> effects) {
         return generateEffectsTooltip(effects, true, true, true);
     }
@@ -138,7 +129,7 @@ public class Auxilium {
     public static List<StatusEffectInstance> calculatePotionDurationByAmplifier(List<StatusEffectInstance> effects, int minTicks, int maxTicks) {
         for (int i = 0; i < effects.size(); i++) {
             StatusEffectInstance effect = effects.get(i);
-            int duration = maxTicks / (effect.getAmplifier()+1);
+            int duration = maxTicks - (effect.getAmplifier()+1)*20;
             if (duration < minTicks) duration = minTicks;
             if (effect.getEffectType().equals(StatusEffects.INSTANT_DAMAGE) || effect.getEffectType().equals(StatusEffects.INSTANT_HEALTH)) duration = 1;
             effects.set(i, new StatusEffectInstance(effect.getEffectType(), duration, effect.getAmplifier()));

@@ -1,0 +1,196 @@
+Every custom potion effect applies Potion instability (even when throwing) for 3 minutes that prevents players to drink them too often
+
+
+Inversion:
+Health Boost <> Decay
+Speed <> Slowness
+Strength <> Weakness
+Nausea > Weakness
+Resistance > Weakness
+Regeneration <> Poison
+Dolphins grace <> Anchor
+Lava affinity > Dolphins grace
+Fire resistance <> Water breathing
+Instant Health <> Instant Damage
+Ignited <> Frozen
+Glowing <> Luck
+Blindness <> Invisibility
+Night vision > Blindness
+Feather falling <> Levitation
+Bouncy <> Cat paws
+Jump boost > Bouncy
+Mining fatigue <> Haste
+
+Nether wart:
+- Potion effect: Decay 1 (-1 max heart/level) 1:00
+- Potion effect: Decay 1 (-1 max heart/level) 1:00
+- Potion effect: Decay 1 (-1 max heart/level) 1:00
+- Potion effect: Decay 1 (-1 max heart/level) 1:00
+
+Fermented spider eye:
+- Potion effect: Poison 1 0:30
+- Potion effect: Invert potion effect placed before and divide duration by 1.5
+- Potion effect: Invert potion effect placed before and divide duration by 1.5
+- Potion effect: Invert potion effect placed before and divide duration by 1.5
+
+Gunpowder:
+- Splash potion
+- Splash potion
+- Splash potion
+- Splash potion
+
+Glowstone:
+- Potion effect: Glowing 0:40
+- Upgrade level of potion effect placed before but half the duration
+- Upgrade level of potion effect placed before but half the duration
+- Upgrade level of potion effect placed before but half the duration
+
+Redstone:
+- Potion effect: Activated 1 (every second activates block below player, every level delay decreases) 1:00
+- Multiply time of potion effect placed before by 2, decrease level if > 1
+- Multiply time of potion effect placed before by 2, decrease level if > 1
+- Multiply time of potion effect placed before by 2, decrease level if > 1
+
+Sugar:
+- Potion effect: Speed 1 2:00
+- Potion effect: Speed 1 2:00
+- Potion effect: Haste 1 1:00
+- Potion effect: Haste 1 1:00
+
+Rabbit's paw:
+- Potion effect: Jump boost 1 2:00
+- Potion effect: Jump boost 1 2:00
+- Potion effect: Cat paws (Increases blocks for fall damage by 2/level) 1 2:00
+- Potion effect: Cat paws (Increases blocks for fall damage by 2/level) 1 2:00
+
+Glistering Melon Slice:
+- Potion effect: Instant Health 1
+- Potion effect: Instant Health 1
+- Potion effect: Health Boost 1 1:00
+- Potion effect: Health Boost 1 1:00
+
+Magma cream:
+- Potion effect: Fire resistance 1 2:00
+- Potion effect: Fire resistance 1 2:00
+- Potion effect: Lava affinity 1 (Increases swim speed in lava) 2:00
+- Potion effect: Lava affinity 1 (Increases swim speed in lava) 2:00
+
+Blaze powder:
+- Potion effect: Ignited (Player is on fire) 0:30
+- Potion effect: Strength 1 2:00
+- Potion effect: Ignited (Player is on fire) 0:30
+- Potion effect: Strength 1 2:00
+
+Golden carrot:
+- Potion effect: Night vision 3:00
+- Potion effect: Night vision 3:00
+- Potion effect: Night vision 3:00
+- Potion effect: Night vision 3:00
+
+Ghast tear:
+- Potion effect: Regeneration 1 0:30
+- Potion effect: Regeneration 1 0:30
+- Potion effect: Regeneration 1 0:30
+- Potion effect: Regeneration 1 0:30
+
+Phantom membrane:
+- Potion effect: Slow falling 1 1:00
+- Potion effect: Slow falling 1 1:00
+- Potion effect: Slow falling 1 1:00
+- Potion effect: Slow falling 1 2:00
+
+Pufferfish:
+- Potion effect: Water breathing 2:00
+- Potion effect: Water breathing 2:00
+- Potion effect: Water breathing 2:00
+- Potion effect: Water breathing 2:00
+
+Scute:
+- Potion effect: Resistance 1 0:40
+- Potion effect: Resistance 1 0:40
+- Potion effect: Resistance 1 0:40
+- Potion effect: Resistance 1 0:40
+
+Wither rose:
+- Potion effect: Wither 1 0:30
+- Potion effect: Wither 1 0:30
+- Potion effect: Wither 1 0:30
+- Potion effect: Wither 1 0:30
+
+Honey bottle:
+- Potion effect: Regeneration 1 0:15
+- Potion effect: Regeneration 1 0:20
+- Potion effect: Health Boost 1 0:30
+- Potion effect: Regeneration 1 0:30 & Health boost 1 1:00
+
+Glow berries:
+- Potion effect: Glowing 0:30
+- Potion effect: Glowing 0:30
+- Potion effect: Glowing 0:30
+- Potion effect: Glowing 0:30
+
+Rotten flesh:
+- Potion effect: Hunger 1 0:20
+- Potion effect: Nausea 1 0:20
+- Potion effect: Hunger 1 0:20
+- Potion effect: Nausea 1 0:20
+
+Slime ball:
+- Potion effect: Bouncy 1 (cut damage from falling in half, bounce up with a third of original speed, every level make more speed) 1:00
+- Potion effect: Bouncy 1 (cut damage from falling in half, bounce up with a third of original speed, every level make more speed) 1:00
+- Potion effect: Bouncy 1 (cut damage from falling in half, bounce up with a third of original speed, every level make more speed) 1:00
+- Potion effect: Bouncy 1 (cut damage from falling in half, bounce up with a third of original speed, every level make more speed) 1:00
+
+Fire charge:
+- Potion effect: Ignited (Player is on fire) 0:30
+- Potion effect: Ignited (Player is on fire) 0:30
+- Potion effect: Ignited (Player is on fire) 0:30
+- Potion effect: Ignited (Player is on fire) 0:30
+
+Chorus fruit:
+- Potion effect: Shift (first damage taken will be canceled) 1:00
+- Potion effect: Shift (first damage taken will be canceled) 1:00
+- Potion effect: Shift (first damage taken will be canceled) 1:00
+- Potion effect: Randomly teleport
+
+Sculk:
+- Potion effect: Darkness 0:30
+- Potion effect: Darkness 0:30
+- Potion effect: Darkness 0:30
+- Potion effect: Darkness 0:30
+
+Spider eye:
+- Potion effect: Poison 1 0:30
+- Potion effect: Poison 1 0:30
+- Potion effect: Poison 1 0:30
+- Potion effect: Poison 1 0:30
+
+Poisonous potato:
+- Potion effect: Nausea 1 0:30
+- Potion effect: Poison 1 0:30
+- Potion effect: Nausea 1 0:30
+- Potion effect: Poison 1 0:30
+
+Nautilus shell:
+- Potion effect: Dolphins grace 1 0:30
+- Potion effect: Dolphins grace 1 0:30
+- Potion effect: Dolphins grace 1 0:30
+- Potion effect: Dolphins grace 1 0:30
+
+Shulker shell:
+- Potion effect: Levitation 1 0:10
+- Potion effect: Levitation 1 0:10
+- Potion effect: Levitation 1 0:10
+- Potion effect: Levitation 1 0:10
+
+Feather:
+- Potion effect: Cat paws (Increases blocks for fall damage by 2/level) 1:00
+- Potion effect: Feather falling 1 0:30
+- Potion effect: Cat paws (Increases blocks for fall damage by 2/level) 1:00
+- Potion effect: Feather falling 1 0:30
+
+Prismarine shards:
+- Potion effect: Mining fatigue 1 1:00
+- Potion effect: Mining fatigue 1 1:00
+- Potion effect: Mining fatigue 1 1:00
+- Potion effect: Mining fatigue 1 1:00
