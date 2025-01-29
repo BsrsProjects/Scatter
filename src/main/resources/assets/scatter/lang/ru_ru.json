@@ -11,9 +11,8 @@
   "item.scatter.large_potion.desc.0": "Хранит до 5 идентичных зелий.",
   "item.scatter.large_potion.desc.1": "Держите с обычным зельем в левой руке, чтобы наполнить сосуд.",
   "item.scatter.large_potion.desc.2": "Неверное зелье может сбросить эффекты зелья!",
-  "block.scatter.soul_brewery": "Зельеварня душ",
-  "block.scatter.soul_brewery.desc.0": "Варит зелье из 1-3 ингридиентов.",
-  "block.scatter.soul_brewery.desc.1": "Ну и что это теперь, Caves of QUD?",
+  "block.scatter.alchemists_crucible": "Тигель алхимика",
+  "block.scatter.alchemists_crucible.desc.0": "Варит зелье из 1-4 ингридиентов.",
   "special.potion_effects.effects": "Эффекты зелий:",
   "special.potion_effects.drained": "- Опустошен",
   "special.uses": "Использований: "

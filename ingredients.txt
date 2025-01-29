@@ -20,6 +20,7 @@ Feather falling <> Levitation
 Bouncy <> Cat paws
 Jump boost > Bouncy
 Mining fatigue <> Haste
+Shift > Resistance
 
 Nether wart:
 - Potion effect: Decay 1 (-1 max heart/level) 1:00
@@ -32,12 +33,6 @@ Fermented spider eye:
 - Potion effect: Invert potion effect placed before and divide duration by 1.5
 - Potion effect: Invert potion effect placed before and divide duration by 1.5
 - Potion effect: Invert potion effect placed before and divide duration by 1.5
-
-Gunpowder:
-- Splash potion
-- Splash potion
-- Splash potion
-- Splash potion
 
 Glowstone:
 - Potion effect: Glowing 0:40

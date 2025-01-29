@@ -1,4 +1,4 @@
-package org.lirox.scatterItem.items.exclusives;
+package org.lirox.scatter.items.exclusives;
 // LiroxDeYamon
 
 

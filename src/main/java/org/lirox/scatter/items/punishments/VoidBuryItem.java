@@ -4,8 +4,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Rarity;
 
-public class VoidBury extends Item {
-    public VoidBury(Settings settings) {
+public class VoidBuryItem extends Item {
+    public VoidBuryItem(Settings settings) {
         super(settings);
     }
 

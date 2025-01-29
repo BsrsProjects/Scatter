@@ -11,9 +11,8 @@
   "item.scatter.large_potion.desc.0": "Stores up to 5 identical potions.",
   "item.scatter.large_potion.desc.1": "Hold with regular potion in off hand to fill the flask.",
   "item.scatter.large_potion.desc.2": "Incorrect potion may reset potion effects!",
-  "block.scatter.soul_brewery": "Soul brewery",
-  "block.scatter.soul_brewery.desc.0": "This block brews a potion using 1-3 different ingredients.",
-  "block.scatter.soul_brewery.desc.1": "What is this now, Caves of QUD?",
+  "block.scatter.alchemists_crucible": "Alchemist's crucible",
+  "block.scatter.alchemists_crucible.desc.0": "Brews a potion using 1-4 different ingredients.",
   "special.potion_effects.effects": "Potion effects:",
   "special.potion_effects.drained": "- Depleted",
   "special.uses": "Uses: "

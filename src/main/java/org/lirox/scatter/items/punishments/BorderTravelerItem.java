@@ -4,8 +4,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Rarity;
 
-public class BorderTraveler extends Item {
-    public BorderTraveler(Settings settings) {
+public class BorderTravelerItem extends Item {
+    public BorderTravelerItem(Settings settings) {
         super(settings);
     }
 
