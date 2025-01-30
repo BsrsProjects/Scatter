@@ -6,6 +6,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
@@ -49,6 +50,9 @@ public class LargePotionItem extends Item {
             ItemStack mainHand = user.getStackInHand(Hand.MAIN_HAND);
             ItemStack offHand = user.getStackInHand(Hand.OFF_HAND);
             List<StatusEffectInstance> effects = PotionUtil.getCustomPotionEffects(mainHand);
+            if (!effects.isEmpty() && stack.getNbt().getInt("uses") <= 0) stack.getNbt().remove("CustomPotionEffect");
+            // TODO: WHY IS THIS NOT WORKIN??????????????????????????????????????????????????????????//
+
             if (offHand.getItem().equals(Items.POTION) && mainHand.getItem().equals(Register.LARGE_POTION)) {
                 List<StatusEffectInstance> potionEffects = Auxilium.mergePotionEffects(
                                 PotionUtil.getPotionEffects(offHand), PotionUtil.getCustomPotionEffects(offHand),

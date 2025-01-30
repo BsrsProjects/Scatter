@@ -178,4 +178,16 @@ public class Auxilium {
         }
         return text;
     }
+
+    public static void incrementStackNbt(ItemStack stack, String key, int count) {
+        stack.getNbt().putInt(key, stack.getNbt().getInt(key)+count);
+    }
+    public static void incrementStackNbtClamp(ItemStack stack, String key, int count, int minCount, int maxCount) {
+        count = MathHelper.clamp(stack.getNbt().getInt(key)+count, minCount, maxCount);
+        stack.getNbt().putInt(key, count);
+    }
+
+    public static List<StatusEffectInstance> getAllPotionEffects(ItemStack stack) {
+        return Auxilium.mergePotionEffects(PotionUtil.getPotionEffects(stack), PotionUtil.getCustomPotionEffects(stack), false, false);
+    }
 }

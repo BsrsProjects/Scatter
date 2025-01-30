@@ -17,8 +17,8 @@ public class IgnitedEffect extends StatusEffect {
 
     @Override
     public void applyUpdateEffect(LivingEntity entity, int amplifier) {
-        entity.setFireTicks(10*amplifier);
+        if (entity.getFireTicks() <= 0) entity.setFireTicks(30-amplifier*5);
+        if (amplifier >= 3) entity.setFireTicks(20);
         super.applyUpdateEffect(entity, amplifier);
     }
-    // TODO: Fix fire ticks
 }

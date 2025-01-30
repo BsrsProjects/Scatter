@@ -5,12 +5,12 @@ import net.minecraft.entity.effect.StatusEffectCategory;
 
 public class LavaAffinityEffect extends StatusEffect {
     public LavaAffinityEffect() {
-        super(StatusEffectCategory.HARMFUL, 0xffffff);
+        super(StatusEffectCategory.HARMFUL, 0xcd5b45);
     }
 
     @Override
     public boolean canApplyUpdateEffect(int duration, int amplifier) {
         return true;
     }
-    // Todo: Fix color + Make it make you fast when in lava
+    // Todo: Make it make you fast when in lava
 }

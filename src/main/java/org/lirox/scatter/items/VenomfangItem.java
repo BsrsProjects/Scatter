@@ -19,6 +19,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import org.lirox.scatter.Auxilium;
 import org.lirox.scatter.Register;
@@ -44,26 +45,50 @@ public class VenomfangItem extends SwordItem {
         if (entity instanceof PlayerEntity user) {
             ItemStack mainHand = user.getStackInHand(Hand.MAIN_HAND);
             ItemStack offHand = user.getStackInHand(Hand.OFF_HAND);
-            List<StatusEffectInstance> effects = PotionUtil.getCustomPotionEffects(mainHand);
-            if (offHand.getItem().equals(Items.POTION) && mainHand.getItem().equals(Register.VENOMFANG)) {
-                List<StatusEffectInstance> potionEffects = Auxilium.calculatePotionDurationByAmplifier(
-                        Auxilium.mergePotionEffects(
-                                PotionUtil.getPotionEffects(offHand), PotionUtil.getCustomPotionEffects(offHand),
-                                false, false), 20, 80);
 
-                offHand.decrement(1);
-                user.giveItemStack(new ItemStack(Items.GLASS_BOTTLE, 1));
-                int increment = 10;
-                if (Auxilium.maxPotionAmplifier(potionEffects) > 0) increment = 5;
+            if (mainHand.getItem().equals(Register.VENOMFANG) && (offHand.getItem().equals(Items.POTION) || offHand.getItem().equals(Register.LARGE_POTION))) {
                 int uses = mainHand.getNbt().getInt("uses");
                 int maxUses = mainHand.getNbt().getInt("maxUses");
-                if (Auxilium.comparePotionAmplifiers(effects, potionEffects)) {
-                    if (uses < maxUses) mainHand.getNbt().putInt("uses", Math.min(maxUses, uses+increment));
-                } else {
-                    mainHand.getNbt().putInt("uses", increment);
-                    PotionUtil.setCustomPotionEffects(mainHand, potionEffects);
-                }
-                user.playSound(SoundEvents.ENTITY_GENERIC_DRINK, 1, 1);
+                List<StatusEffectInstance> effects = PotionUtil.getCustomPotionEffects(mainHand);
+
+                if (offHand.getItem().equals(Items.POTION)) {
+                    List<StatusEffectInstance> potionEffects = Auxilium.calculatePotionDurationByAmplifier(Auxilium.getAllPotionEffects(stack), 20, 80);
+
+                    if (Auxilium.comparePotionAmplifiers(effects, potionEffects)) {
+                        if (uses < maxUses) Auxilium.incrementStackNbtClamp(stack, "uses", 10, 0, maxUses);
+                        else return;
+                    } else {
+                        mainHand.getNbt().putInt("uses", 10);
+                        PotionUtil.setCustomPotionEffects(mainHand, potionEffects);
+                    }
+
+                    user.giveItemStack(new ItemStack(Items.GLASS_BOTTLE, 1));
+                    offHand.decrement(1);
+                } else if (offHand.getItem().equals(Register.LARGE_POTION)) {
+                    List<StatusEffectInstance> potionEffects = Auxilium.calculatePotionDurationByAmplifier(PotionUtil.getCustomPotionEffects(offHand), 20, 80);
+
+                    int count = 0;
+                    if (Auxilium.stackNbtHasKey(offHand, "uses")) count = offHand.getNbt().getInt("uses");
+
+                    if (count == 0) return;
+
+                    int required = maxUses-uses;
+                    int used = Math.min(count, required);
+                    int remaining = count-used;
+
+                    if (Auxilium.comparePotionAmplifiers(effects, potionEffects)) {
+                        if (required > 0 && used > 0) {
+                            Auxilium.incrementStackNbt(stack, "uses", used);
+                            offHand.getNbt().putInt("uses", remaining);
+                        }
+                        else return;
+                    } else {
+                        mainHand.getNbt().putInt("uses", used);
+                        PotionUtil.setCustomPotionEffects(mainHand, potionEffects);
+                        offHand.getNbt().putInt("uses", remaining);
+                    }
+                } else return;
+                user.playSound(SoundEvents.ENTITY_GENERIC_DRINK, 0.2f, 1);
             }
         }
     }
@@ -75,10 +100,8 @@ public class VenomfangItem extends SwordItem {
             for (StatusEffectInstance effect : effects) {
                 if (!target.hasStatusEffect(effect.getEffectType())) {
                     target.addStatusEffect(effect);
-                    stack.getNbt().putInt("uses", stack.getNbt().getInt("uses")-1);
-                    if (stack.getNbt().getInt("uses") == 0) {
-                        stack.getNbt().remove("CustomPotionEffects");
-                    }
+                    Auxilium.incrementStackNbt(stack, "uses", -1);
+                    if (stack.getNbt().getInt("uses") == 0) stack.getNbt().remove("CustomPotionEffects");
 //                    for (int i = 0; i < 15; i++) {
 //                        target.getWorld().addParticle(ParticleTypes.EFFECT, target.getX(), target.getY(), target.getZ(), random.nextDouble()-0.5, random.nextDouble()-0.5, random.nextDouble()-0.5);
 //                    }
